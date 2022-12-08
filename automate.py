@@ -9,26 +9,26 @@ def read_file(path: str):
     except FileNotFoundError:
         raise FileNotFoundError(f"File {path} not found")
 
-def remove_duplicates(text: list[str]):
+def remove_dupes(text: list[str]):
     return list(set(text))
 
 
 def find_emails(text: str):
     # useful regex https://stackoverflow.com/questions/67423037/python-extract-email-address-from-a-huge-string
     email = re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+", text)
-    no_dup_emails = remove_duplicates(email)
+    no_dup_emails = remove_dupes(email)
 
     return no_dup_emails
 
 
 def phone_format(phone_number: str):
+    # https://stackoverflow.com/questions/7058120/whats-the-best-way-to-format-a-phone-number-in-python
     return format(int(phone_number[:-1]), ",").replace(",", "-") + phone_number[-1]
-
 
 
 def find_phone_numbers(text: str) -> list[str]:
     phone_numbers_regex = re.findall(r'[\+\(]?[1-9][0-9 .\-\(\)]{8,}\d', text)
-    no_dup = remove_duplicates(phone_numbers_regex)
+    no_dup = remove_dupes(phone_numbers_regex)
     stripped_numbers = []
     for phone_number in no_dup:
         clean_one = phone_number.replace('+', '')
