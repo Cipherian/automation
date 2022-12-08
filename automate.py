@@ -18,7 +18,7 @@ def find_emails(text: str):
     email = re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+", text)
     no_dup_emails = remove_duplicates(email)
 
-    return no_dup_emails
+    return sorted(no_dup_emails)
 
 
 def phone_format(phone_number: str):
@@ -38,7 +38,7 @@ def find_phone_numbers(text: str) -> list[str]:
         clean_five = clean_four.replace('-', '')
         stripped_numbers.append(phone_format(clean_five))
 
-    return stripped_numbers
+    return sorted(stripped_numbers)
 
 
 def write_data(text: list[str], output_path: str):
